@@ -1,5 +1,4 @@
 import 'package:app_todo/ui/home/home-screen.dart';
-import 'package:app_todo/ui/home/list-tasks/edit-task.dart';
 import 'package:app_todo/ui/home/list-tasks/list_tasks.dart';
 import 'package:app_todo/ui/home/settings/settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
