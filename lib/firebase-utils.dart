@@ -34,8 +34,15 @@ Future<void> addTaskToFS(Task task) {
   task.id = docRef.id;
   return docRef.set(task);
 }
-
 void taskIsDone(Task task) {
   var collRef = getTasksCollection();
   collRef.doc(task.id).update({"isDone": task.isDone ? false : true});
+}
+Future<void> editTask(Task task,DateTime dateTime)  {
+  var collRef = getTasksCollection();
+ return collRef.doc(task.id).update({
+    "title": task.title,
+    "description": task.description,
+    "date":DateUtils.dateOnly(dateTime).millisecondsSinceEpoch
+  });
 }

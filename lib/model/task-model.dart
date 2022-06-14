@@ -19,7 +19,6 @@ class Task {
       "isDone": isDone
     };
   }
-
   Task.fromJson(Map<String, dynamic> json)
       : this(
             id: json["id"] as String,

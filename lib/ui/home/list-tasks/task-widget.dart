@@ -40,7 +40,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       ),
       child: InkWell(
         onTap: (){
-          showBottomSheetEditTask();
+          Navigator.pushNamed(context, EditTask.routeName,arguments:widget.task);
           setState(() {
           });
         },
@@ -149,12 +149,5 @@ class _TaskWidgetState extends State<TaskWidget> {
       ),
     );
   }
-  void showBottomSheetEditTask() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) => EditTask(),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20), topLeft: Radius.circular(20))));
-  }
+
 }

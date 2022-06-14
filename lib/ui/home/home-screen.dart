@@ -1,4 +1,3 @@
-import 'package:app_todo/generated/l10n.dart';
 import 'package:app_todo/ui/home/app-provider/app_provider.dart';
 import 'package:app_todo/ui/home/my-theme.dart';
 import 'package:app_todo/ui/home/settings/settings.dart';

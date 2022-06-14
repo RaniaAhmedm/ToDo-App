@@ -22,56 +22,54 @@ class _TapListTasksState extends State<TapListTasks> {
   Widget build(BuildContext context) {
     var provider = Provider.of<AppProvider>(context);
 
-    return Container(
-      child: Column(
-        children: [
-          CalendarTimeline(
-            initialDate:selectedDate,
-            firstDate: DateTime.now().subtract(Duration(days: 365)),
-            lastDate: DateTime.now().add(Duration(days: 365)),
-            onDateSelected: (date){
-              if(date==null)return;
-              selectedDate=date;
-              setState(() {
-              });
-            },
-            leftMargin: 20,
-            monthColor: provider.appTheme==ThemeMode.light ?Colors.black:Colors.white,
-            dayColor:  provider.appTheme==ThemeMode.light ?Colors.black:Colors.white,
-            activeDayColor: Theme.of(context).primaryColor,
-            activeBackgroundDayColor: Colors.white,
-            dotsColor: Theme.of(context).primaryColor,
-            selectableDayPredicate: (date) => true,
-            locale: 'en',
-          ),
-          SizedBox(
-            height: 7,
-          ),
-          Expanded(
-            child: StreamBuilder<QuerySnapshot<Task>>(
-              stream:listenForTasks(selectedDate),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('something went wrong');
-                  //  show try again btn
-                }
-                //  we have data and show data
-                var tasksList = snapshot.data?.docs
-                        .map((docSnap) => docSnap.data())
-                        .toList() ?? [];
-                return ListView.builder(
-                  itemBuilder: (_, index) => TaskWidget(task: tasksList[index],),
-                  itemCount:tasksList.length,
+    return Column(
+      children: [
+        CalendarTimeline(
+          initialDate:selectedDate,
+          firstDate: DateTime.now().subtract(Duration(days: 365)),
+          lastDate: DateTime.now().add(Duration(days: 365)),
+          onDateSelected: (date){
+            if(date==null)return;
+            selectedDate=date;
+            setState(() {
+            });
+          },
+          leftMargin: 20,
+          monthColor: provider.appTheme==ThemeMode.light ?Colors.black:Colors.white,
+          dayColor:  provider.appTheme==ThemeMode.light ?Colors.black:Colors.white,
+          activeDayColor: Theme.of(context).primaryColor,
+          activeBackgroundDayColor: Colors.white,
+          dotsColor: Theme.of(context).primaryColor,
+          selectableDayPredicate: (date) => true,
+          locale: 'en',
+        ),
+        SizedBox(
+          height: 7,
+        ),
+        Expanded(
+          child: StreamBuilder<QuerySnapshot<Task>>(
+            stream:listenForTasks(selectedDate),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
-            ),
+              } else if (snapshot.hasError) {
+                return Text('something went wrong');
+                //  show try again btn
+              }
+              //  we have data and show data
+              var tasksList = snapshot.data?.docs
+                      .map((docSnap) => docSnap.data())
+                      .toList() ?? [];
+              return ListView.builder(
+                itemBuilder: (_, index) => TaskWidget(task: tasksList[index],),
+                itemCount:tasksList.length,
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
