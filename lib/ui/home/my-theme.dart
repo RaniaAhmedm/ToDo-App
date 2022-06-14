@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 class MyThemeData {
   static Color primaryLightColor = Color.fromARGB(255, 93, 156, 236);
-  static Color primaryDarkColor = Color.fromARGB(255, 93, 156, 236);
+  static Color primaryDarkColor = Color.fromARGB(255, 73, 117, 170);
   static Color lightBackgroundColor = Color.fromARGB(255, 223, 236, 219);
   static Color darkBackgroundColor = Color.fromARGB(255, 6, 14, 30);
+  static Color darkColor = Color.fromARGB(255, 20, 25, 34);
+
   static Color whiteColor = Colors.white;
   static Color blackColor = Colors.black;
   static Color greenColor = Color.fromARGB(255, 97, 231, 87);
   static Color redColor = Color.fromARGB(255, 236, 75, 75);
   static Color greyColor = Color.fromARGB(255, 120, 120, 120);
 
-  static final ThemeData lightTheme = ThemeData(
+  static  ThemeData lightTheme = ThemeData(
     colorScheme: ColorScheme(
       primary: primaryLightColor,
       onPrimary: whiteColor,
@@ -75,7 +77,7 @@ class MyThemeData {
     ),
   );
 
-  static final ThemeData darkTheme = ThemeData(
+  static  ThemeData darkTheme = ThemeData(
     colorScheme: ColorScheme(
       primary: primaryDarkColor,
       onPrimary: whiteColor,
@@ -130,9 +132,10 @@ class MyThemeData {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: whiteColor,
+      elevation: 0.0,
+      backgroundColor:primaryDarkColor,
       selectedItemColor: primaryDarkColor,
-      unselectedItemColor: Colors.grey.shade500,
+      unselectedItemColor: Colors.grey.shade200,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryDarkColor,

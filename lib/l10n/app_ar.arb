@@ -1,3 +1,13 @@
-{
+{"todolist": "عمل القائمة",
+  "language": "اللغة",
+  "mode": "السمة",
+  "delete":"حذف",
+  "done":"تم!",
+  "addnewtask": "أضف مهمة جديده",
+  "enteryourtask": "أدخل مهمتك",
+  "entertasknote":"أدخل ملاحظتك",
+  "note": "الملاحظة",
+  "taskdate": "تاريخ المهمة",
+  "addtask": "اضافة المهمة"
 
 }

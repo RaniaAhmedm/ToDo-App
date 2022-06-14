@@ -1,9 +1,12 @@
+import 'package:app_todo/generated/l10n.dart';
 import 'package:app_todo/ui/home/app-provider/app_provider.dart';
+import 'package:app_todo/ui/home/my-theme.dart';
 import 'package:app_todo/ui/home/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'add-task-bottomSheet.dart';
 import 'list-tasks/list_tasks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';
@@ -20,22 +23,28 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    var provider=Provider.of<AppProvider>(context);
+    var provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-        Theme.of(context).primaryColor,
+        toolbarHeight: MediaQuery.of(context).size.height * .1,
+        backgroundColor: provider.appTheme == ThemeMode.light
+            ? MyThemeData.primaryLightColor
+            : MyThemeData.primaryDarkColor,
         title: Text(
-          'To Do List',
-          style:
-              Theme.of(context).textTheme.headline2?.copyWith(wordSpacing: -2,fontStyle: FontStyle.italic),
+            AppLocalizations.of(context)!.todolist,
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              ?.copyWith(wordSpacing: -2, fontStyle: FontStyle.italic),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 7.0,
         child: BottomNavigationBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: provider.appTheme == ThemeMode.light
+              ? MyThemeData.whiteColor
+              : MyThemeData.darkColor,
           onTap: (int index) {
             currenttIndex = index;
             setState(() {});

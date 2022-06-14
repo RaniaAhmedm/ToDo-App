@@ -33,17 +33,16 @@ class _TapListTasksState extends State<TapListTasks> {
               if(date==null)return;
               selectedDate=date;
               setState(() {
-
               });
             },
             leftMargin: 20,
-            monthColor: provider.appTheme==ThemeMode.light ?Colors.grey[800]:Colors.white,
-            dayColor: Colors.black,
+            monthColor: provider.appTheme==ThemeMode.light ?Colors.black:Colors.white,
+            dayColor:  provider.appTheme==ThemeMode.light ?Colors.black:Colors.white,
             activeDayColor: Theme.of(context).primaryColor,
             activeBackgroundDayColor: Colors.white,
             dotsColor: Theme.of(context).primaryColor,
             selectableDayPredicate: (date) => true,
-            locale: 'en_ISO',
+            locale: 'en',
           ),
           SizedBox(
             height: 7,

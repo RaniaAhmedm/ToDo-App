@@ -11,14 +11,17 @@ CollectionReference<Task> getTasksCollection() {
           toFirestore: (task, options) => task.toJson());
   return typedCollection;
 }
-void deleteTask(Task task){
+
+void deleteTask(Task task) {
   getTasksCollection().doc(task.id).delete();
 }
+
 Future<QuerySnapshot<Task>> getTasks(DateTime date) {
   return getTasksCollection()
       .where('date', isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
       .get();
 }
+
 Stream<QuerySnapshot<Task>> listenForTasks(DateTime date) {
   return getTasksCollection()
       .where('date', isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
@@ -30,4 +33,9 @@ Future<void> addTaskToFS(Task task) {
   var docRef = collection.doc();
   task.id = docRef.id;
   return docRef.set(task);
+}
+
+void taskIsDone(Task task) {
+  var collRef = getTasksCollection();
+  collRef.doc(task.id).update({"isDone": task.isDone ? false : true});
 }

@@ -1,1 +1,13 @@
-{}
+{"todolist":"To Do List",
+  "language": "Language",
+  "mode": "Mode",
+  "delete":"Delete",
+  "done":"Done!",
+  "addnewtask": "Add New Task",
+  "enteryourtask": "enter your task",
+  "entertasknote":"enter task note",
+  "note": "Note",
+  "taskdate": "Task Date",
+  "addtask": "Add Task"
+
+}

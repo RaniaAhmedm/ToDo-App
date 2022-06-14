@@ -1,20 +1,16 @@
-import 'package:app_todo/generated/l10n.dart';
 import 'package:app_todo/ui/home/app-provider/app_provider.dart';
 import 'package:app_todo/ui/home/my-theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../firebase-utils.dart';
-import '../../model/task-model.dart';
-import '../ui-utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AddTaskBottomSheet extends StatefulWidget {
+class EditTask extends StatefulWidget {
   @override
-  State<AddTaskBottomSheet> createState() => _AddTaskBottomSheetState();
+  State<EditTask> createState() => _EditTaskState();
 }
 
-class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
+class _EditTaskState extends State<EditTask> {
   GlobalKey<FormState> formController = GlobalKey<FormState>();
   late AppProvider provider;
   String taskTitle = '';
@@ -53,7 +49,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       },
                       decoration: InputDecoration(
                           labelText:
-                              AppLocalizations.of(context)!.enteryourtask),
+                          AppLocalizations.of(context)!.enteryourtask),
                     ),
                     TextFormField(
                       onChanged: (text) {
@@ -76,7 +72,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       height: 12,
                     ),
                     Text(
-                        AppLocalizations.of(context)!.taskdate,
+                      AppLocalizations.of(context)!.taskdate,
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     SizedBox(
@@ -84,7 +80,6 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     ),
                     InkWell(
                       onTap: () {
-                        chooseDate();
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +110,6 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                                 : MyThemeData.primaryDarkColor),
                       ),
                       onPressed: () {
-                        addTask();
                       },
                       child: Text(AppLocalizations.of(context)!.addtask),
                     ),
@@ -132,41 +126,4 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     );
   }
 
-  void addTask() {
-    if (formController.currentState?.validate() == true) {
-      //  add task
-      Task task = new Task(
-          title: taskTitle,
-          description: descriptionTitle,
-          date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
-      //show loading alert
-      showLoading(context, 'Loading......', isCancelabe: false);
-      addTaskToFS(task).timeout(Duration(milliseconds: 500), onTimeout: () {
-        hideDialog(context);
-        showMessage(context, 'Task was added successfully', 'ok', () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        });
-      }).onError((error, stackTrace) {
-        hideDialog(context);
-        showMessage(context, 'something wrong please try again later', 'ok',
-            () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }, isCancelable: false);
-      });
-    }
-  }
-
-  void chooseDate() async {
-    var chooseDate = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now().add((Duration(days: 365))));
-    if (chooseDate != null) {
-      selectedDate = chooseDate;
-      setState(() {});
-    }
-  }
 }
